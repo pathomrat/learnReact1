@@ -1,0 +1,22 @@
+@font-face{
+    font-family: 'Prompt-Regular';
+    src: url('/client/public/fonts/Prompt-Regular.ttf');
+}
+
+@font-face{
+    font-family: 'Prompt-Medium';
+    src: url('/client/public/fonts/Prompt-Medium.ttf.ttf');
+}
+
+@font-face{
+    font-family: 'Prompt-Bold';
+    src: url('/client/public/fonts/Prompt-Bold.ttf.ttf');
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Prompt-Medium';
+}
+
+.title {
+    font-family: 'Prompt-Regular';
+}
