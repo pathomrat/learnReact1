@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Header from './component/Header';
 import Footer from './component/Footer';
 import Monitor from './component/monitor/Monitor';
+import Axios from  'axios'
 
 class App extends Component {
 
@@ -12,7 +13,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.setState({
+    //MANUAL
+    /* this.setState({
       products: [
         { productId: 1, productName: "สลัดผัก", unitPrice: "120", thumbnail: "/images/product/1.jpg" },
         { productId: 2, productName: "ไก่ทอด", unitPrice: "90", thumbnail: "/images/product/2.jpg" },
@@ -21,8 +23,23 @@ class App extends Component {
         { productId: 5, productName: "เค้ก 3 ชั้น", unitPrice: "200", thumbnail: "/images/product/5.jpg" },
         { productId: 6, productName: "กาแฟ เฮลตี้ฟู้ด", unitPrice: "140", thumbnail: "/images/product/6.jpg" }
       ]
-    })
+    }) */
+
+
+    //REST API FETCH
+    /* fetch("http://localhost:3001/products", { method: "GET" })
+      .then(res => res.json())
+      .then(res => {this.setState({products : res})})
+    */
+
+    //Axios
+    Axios.get("http://localhost:3001/products").then(res => {
+      {this.setState({products : res.data})}
+    });
+    
   }
+
+
 
   render() {
     return (
