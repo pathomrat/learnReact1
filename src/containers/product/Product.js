@@ -2,40 +2,28 @@ import React, { Component } from 'react';
 import Header from '../../component/Header';
 import Footer from '../../component/Footer';
 import ProductList from '../../component/product/ProductList';
-import Axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { productsFetch, productDelete } from '../../actions'
 
 class Products extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { products: null };
         this.delProduct = this.delProduct.bind(this);
         this.editProduct = this.editProduct.bind(this);
     }
 
     componentDidMount() {
-        Axios.get('http://localhost:3001/products').then(
-            res => {
-                this.setState({ products: res.data });
-            }
-        )
+        this.props.productsFetch();
     }
 
     delProduct(product) {
-        Axios.delete("http://localhost:3001/products/" + product.productId).then(
-            res => {
-                Axios.get("http://localhost:3001/products").then(
-                    res => {
-                        this.setState({ products: res.data });
-                    }
-                )
-            }
-        )
+        this.props.productDelete(product.productId);
     }
 
     editProduct(product) {
-        this.props.history.push('products/edit/'+ product.productId);
+        this.props.history.push('products/edit/' + product.productId);
     }
 
     render() {
@@ -51,7 +39,7 @@ class Products extends Component {
                             <button className="btn btn-success title float-right" onClick={() => this.props.history.push('products/add')}>เพิ่ม</button>
                         </div>
                     </div>
-                    <ProductList products={this.state.products}
+                    <ProductList products={this.props.products}
                         onDelProduct={this.delProduct} onEditProduct={this.editProduct}
                     />
                 </div>
@@ -61,4 +49,8 @@ class Products extends Component {
     }
 }
 
-export default withRouter(Products);
+function mapStateToProps({ products }) {
+    return { products }
+}
+
+export default withRouter(connect(mapStateToProps, { productsFetch, productDelete })(Products));
