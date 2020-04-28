@@ -27,7 +27,7 @@ class Order extends Component {
                     <h5>วันที่ {date.toLocaleDateString()} {date.toLocaleTimeString()}</h5>
                     <ul>
                         {order.orders && order.orders.map(record => {
-                            return (<li key={record.product.productId}>
+                            return (<li key={record.product.id}>
                                 {record.product.productName} x {record.quantity} = {record.product.unitPrice * record.quantity}
                             </li>)
                         })}
